@@ -1,10 +1,9 @@
 #!/usr/bin/env python
 
-
 ##################################################################
+
 #Ryan Flamm
-#problem 11.8
-#This program studies the strike of a hammer on a piano string. The effects are studied through the force on the soundboard as well as the frequencies produced
+#This program studies the strike of a hammer on a piano string. The effects are studied through the force on the soundboard as well as the frequencies produced.
 
 ################################################################## 
 import matplotlib.pyplot as plt
@@ -14,7 +13,7 @@ from numpy.linalg import norm
 from numpy.fft import fft
 ##################################################################
 
-#Bounds
+# Bounds
 a = 0 		#Left bound
 b = 1.06	#Right bound
 dx = .00065
@@ -22,20 +21,19 @@ r = 1.
 c = 340.
 dt = r/c * dx
 N = int((b-a)/dx)
-
-
 x = linspace(a,b,N)
 y = zeros(len(x),float)
 yp = copy(y) 
 ypp = copy(yp)
 
-#initial conds
+
+# Initial conditions
 tMax = 0.05
 t = 0
 T = 349		# Tension in string
 mh = .0043	# Mass of the hammer
 f = 65		# Frequency of the string
-vh = 4.	# Speed of the hammer. Large value means a stronger hammer strike
+vh = 4.	        # Speed of the hammer. Large value means a stronger hammer strike
 zh = 0
 m = .008	# Linear density of the string
 mew =.008
@@ -43,8 +41,6 @@ Q = b/8.	# Location of the hammer strick
 QIndex = int(Q/dx)
 Fh = zeros(len(x),float)
 
-# Fourier Transform constans defined
-#Nsamples=int(tMax)
 
 # Initialize arrays for finding the force on the bridge
 Fb = [] 
@@ -63,7 +59,8 @@ for t in time:
         zh +=  vh * dt 
 	Fb.append(T *((y[1]-y[0])/dx))
 
-# this commented chunk will run the animation
+	
+# This section will run the animation
         if index % 100 == 0:
 		plt.figure(1)
 	        plt.scatter(x,y)
@@ -76,12 +73,14 @@ for t in time:
 	yp = copy(y)
 	index += 1
 
-#plot force
+	
+# plot the force
 plt.figure(3)
 plt.ylim(-10,20)
 plt.scatter(time,Fb)
 
-#Fourier Transform
+
+# Fourier Transform
 d = fft(Fb)
 fN = 1/(2* dt) 
 freq = linspace(0,fN,len(d)/2)
@@ -89,5 +88,3 @@ plt.figure(2)
 plt.scatter(freq,abs(d[:len(d)/2]))
 plt.xlim(0,2000)
 plt.show()
-
-
