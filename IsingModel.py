@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 
-#Ryan Flamm
-#8.9
-#3/1/2016
+###################################################
+
+# Ryan Flamm
+# This code uses the Ising model which implements the Monte Carlo method to study the changes of spins within a material.
 
 ###################################################
 from random import choice,random,randint,uniform
@@ -11,13 +12,13 @@ from numpy import exp
 import matplotlib.pyplot as plt
 ###################################################
 
-#finds the required energy for a given spin to flip
+# Finds the required energy for a given spin to flip
 def Eflip(spins,x,y):
 	J = -1.
         E = -2 * J * (spins[(x-1)%nx][y] + spins[(x+1)%nx][y] + spins[x][(y-1)%ny] + spins[x][(y+1)%ny]) * spins[x][y]
 	return E
 
-#finds the total energy of the system
+# Finds the total energy of the system
 def totalE(spins,x,y):
         total = 0
         for i in range(nx):
@@ -26,26 +27,25 @@ def totalE(spins,x,y):
         return total
 
 
-#Variables
-nx = 10	 	        #grid size in x direction
-ny = 10		        #grid size in y direction
-t = 0		        #initial time	
-tmax = 5000000		#max time the program will reach
-dt = 2		        #timestep
-kB = 1                  #Boltzmann's Constant
-temp = 1                #Temperature
+# Variables
+nx = 10	 	        # Grid size in x direction
+ny = 10		        # Grid size in y direction
+t = 0		        # Initial time	
+tmax = 5000000		# Max time the program will reach
+dt = 2		        # Timestep
+kB = 1                  # Boltzmann's Constant
+temp = 1                # Temperature
 
 
-#set up random initial spins in grid
+# Set up random initial spins in grid
 spins = [[choice([-1,1]) for n in range(nx)] for m in range (ny)]
 
 
-
-#Loop that decides whether a given spin will flip or not, according to the energy levels in the surrounding area
+# Loop that decides whether a given spin will flip or not, according to the energy levels in the surrounding area
 while t < tmax:
-        for i in range(tmax):           	#for each time step
-	        x = randint(0,nx-1)     	#chooses a random x position	
-	        y = randint(0,nx-1)             #chooses a random y position
+        for i in range(tmax):           	# For each time step
+	        x = randint(0,nx-1)     	# Chooses a random x position	
+	        y = randint(0,nx-1)             # Chooses a random y position
 	        Energy = Eflip(spins,x,y)
                 totE = totalE(spins,x,y)
                 t += dt
@@ -53,23 +53,22 @@ while t < tmax:
 		        spins[x][y] *= -1
 		        totE += Energy
 	        else:	
-		        P = exp(-Energy/(kB*temp))  #Boltzmann factor
-		        r = uniform(0,1)	    #random number between 0 and 1
-                        #if r is less than or equal to P then the spin will flip
-		        if r <= P:		    	
+		        P = exp(-Energy/(kB*temp))  # Boltzmann factor
+		        r = uniform(0,1)	    # Random number between 0 and 1
+		        if r <= P:		    # If r is less than or equal to P then the spin will flip
 			        spins[x][y] *= -1
 			        totE += Energy
                                 
-	        #show the spin plot and energy vs. time plot
-                #spin plot
+	    # Show the spin plot and energy vs. time plot
+                # Spin plot
                 if i % 1000 == 0:	
                         plt.subplot(1,2,2)
                         imshow(spins)
-                        #gray()
+                        # gray()
                         draw()
 		        pause(10e-6)
 
-                        #energy vs. time plot that updates in time
+                        # Energy vs. time plot that updates in time
                         plt.subplot(1,2,1)
                         plt.xlabel('Time')
                         plt.ylabel('Total Energy')
