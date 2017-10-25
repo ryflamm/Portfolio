@@ -60,12 +60,13 @@ while t < tmax:
 			        spins[x][y] *= -1
 			        totE += Energy
                                 
-	    # Show the spin plot and energy vs. time plot
-                # Spin plot
+	        # Show the spin plot and energy vs. time plot
                 if i % 1000 == 0:	
+			
+			# Spin plot
                         plt.subplot(1,2,2)
                         imshow(spins)
-                        # gray()
+                        gray()
                         draw()
 		        pause(10e-6)
 
