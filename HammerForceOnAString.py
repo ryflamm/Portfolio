@@ -2,8 +2,8 @@
 
 ##################################################################
 
-#Ryan Flamm
-#This program studies the strike of a hammer on a piano string. The effects are studied through the force on the soundboard as well as the frequencies produced.
+# Ryan Flamm
+# This program studies the strike of a hammer on a piano string. The effects are studied through the force on the soundboard as well as the frequencies produced.
 
 ################################################################## 
 import matplotlib.pyplot as plt
@@ -14,8 +14,8 @@ from numpy.fft import fft
 ##################################################################
 
 # Bounds
-a = 0 		#Left bound
-b = 1.06	#Right bound
+a = 0 		# Left bound
+b = 1.06	# Right bound
 dx = .00065
 r = 1.
 c = 340.
@@ -74,7 +74,7 @@ for t in time:
 	index += 1
 
 	
-# plot the force
+# Plot the force
 plt.figure(3)
 plt.ylim(-10,20)
 plt.scatter(time,Fb)
