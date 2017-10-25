@@ -3,7 +3,7 @@
 ##################################################################
 
 # Ryan Flamm
-# This program studies the strike of a hammer on a piano string. The effects are studied through the force on the soundboard as well as the frequencies produced.
+# This program studies the strike of a hammer on a piano string. The effects are studied through the force on the bridge (the fulcrum between the string and the soundboard) as well as the frequencies produced. Two plots are produced. The first shows the bridge force over time, while the second shows the frequency spectrum found through fourier analysis.
 
 ################################################################## 
 import matplotlib.pyplot as plt
@@ -16,9 +16,9 @@ from numpy.fft import fft
 # Bounds
 a = 0 		# Left bound
 b = 1.06	# Right bound
-dx = .00065
-r = 1.
-c = 340.
+dx = .00065     # Spatial step size
+r = 1.          # Radius
+c = 340.        # Speed of sound
 dt = r/c * dx
 N = int((b-a)/dx)
 x = linspace(a,b,N)
@@ -29,15 +29,15 @@ ypp = copy(yp)
 
 # Initial conditions
 tMax = 0.05
-t = 0
-T = 349		# Tension in string
-mh = .0043	# Mass of the hammer
-f = 65		# Frequency of the string
-vh = 4.	        # Speed of the hammer. Large value means a stronger hammer strike
+t = 0              # Initial time
+T = 349		   # Tension in string
+mh = .0043	   # Mass of the hammer
+f = 65		   # Frequency of the string
+vh = 4.	           # Speed of the hammer. Large value means a stronger hammer strike
 zh = 0
-m = .008	# Linear density of the string
-mew =.008
-Q = b/8.	# Location of the hammer strick
+m = .008	   # Linear density of the string
+mew =.008          # Mass per unit length
+Q = b/8.	   # Location of the hammer strick
 QIndex = int(Q/dx)
 Fh = zeros(len(x),float)
 
