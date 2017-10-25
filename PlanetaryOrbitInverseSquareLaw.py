@@ -2,7 +2,7 @@
 
 ###################################################################
 # Ryan Flamm
-# This program puts to question the inverse square law as it relates to the orbits of planets. By changing the exponent in the denominator we can see how the planets would act if they did not follow the inverse square law.
+# This program puts to question the inverse square law as it relates to the orbits of planets. By changing the exponent in the denominator to anything other than beta=2, we can see how the planets would act if they did not follow the inverse square law. The output of this code is an animation of the orbit given the input value of beta.
 
 ###################################################################
 from numpy import arange,array,pi,sin,cos,exp,log,log2,abs
