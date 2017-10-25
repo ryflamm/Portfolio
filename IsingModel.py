@@ -3,7 +3,7 @@
 ###################################################
 
 # Ryan Flamm
-# This code uses the Ising model which implements the Monte Carlo method to study the changes of spins within a material.
+# This code uses the Ising model which implements the Monte Carlo method to study the changes of spins within a material. As the temperature is increased the probability of ferro-magnetism decreases. In contrast, with low temperature ferro-magnetism will occur as the system settles into having all positive or all negative spins. Two plots are produced: (1) a 2D model showing the spins over time, (2) a plot of total energy over time
 
 ###################################################
 from random import choice,random,randint,uniform
