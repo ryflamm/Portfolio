@@ -18,6 +18,7 @@ def Eflip(spins,x,y):
         E = -2 * J * (spins[(x-1)%nx][y] + spins[(x+1)%nx][y] + spins[x][(y-1)%ny] + spins[x][(y+1)%ny]) * spins[x][y]
 	return E
 
+
 # Finds the total energy of the system
 def totalE(spins,x,y):
         total = 0
