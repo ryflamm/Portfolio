@@ -2,7 +2,7 @@
 
 ##################################################################
 # Ryan Flamm
-# This code uses Molecular Dynamics to study the melting point of a 3D system.
+# This code uses molecular dynamics to study the melting point of a face-centered cubic lattice structure. The output of the code is a 3D simulation of a crystal structure in the melting transition, where the individual molecules can be seen and tracked.
 ##################################################################
 
 from mpl_toolkits.mplot3d import Axes3D
@@ -18,7 +18,7 @@ def getForce(positions,particle,sizeX,sizeY,sizeZ):
     fX = 0
     fY = 0
     fZ = 0
-    # Find components of r vector
+    # Find components of r vector (intermolecular distance)
     for i in positions:
         xDiff = (i - particle)[0]
         yDiff = (i - particle)[1]
@@ -49,8 +49,7 @@ def getForce(positions,particle,sizeX,sizeY,sizeZ):
         distance = norm(particle - modifiedPos)
 
         # Establishes the strength of the force using Lennard-Jones potential
-        # These bounds are used to cut unnecessary calculations above r=3
-        if 0.1 <= distance <= 3.:
+        if 0.1 <= distance <= 3.: # Bounds used to cut unnecessary calculations above r=3 where electromagnetic forces are negligible.
             fX += 24. * (3./distance**13 - 1./distance**7) * xDiff/distance
             fY += 24. * (3./distance**13 - 1./distance**7) * yDiff/distance
             fZ += 24. * (3./distance**13 - 1./distance**7) * zDiff/distance
@@ -62,7 +61,7 @@ def initializeParticles(lVecs,sizeX,sizeY,sizeZ):
     positions = []
     velocities = []
     deltaR = 0.1
-    v0 = 10            # Initial velocity
+    v0 = 10            # Initial velocity representing the average kinetic energy (temperature)
 
     for i in range(0,sizeX):
         for j in range(0,sizeY):
@@ -83,6 +82,7 @@ lVecs = array([[1.,0,0],[0,1.,0],[0,0,1.]])
 
 
 positions,velocities = initializeParticles(lVecs,sizeX,sizeY,sizeZ)
+
 
 # Sets current conditions to that found in InitialParticles
 positionsC = copy(positions)
